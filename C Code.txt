@@ -1,0 +1,19 @@
+int min(int a, int b){
+    return a < b?  a : b;
+}
+
+int max(int a, int b){
+    return a > b?   a : b;
+}
+
+int findUnsortedSubarray(int* nums, int numsSize) {
+    int begin = -1, end = -2;
+    int max_num = nums[0], min_num = nums[numsSize - 1];
+    for(int i = 1; i < numsSize; ++i){
+        max_num = max(max_num, nums[i]);
+        min_num = min(min_num, nums[numsSize - 1 - i]);
+        if(nums[i] < max_num)   end = i;
+        if(min_num < nums[numsSize - 1 - i])   begin = numsSize - 1 - i;
+    }
+    return end - begin + 1;
+}
